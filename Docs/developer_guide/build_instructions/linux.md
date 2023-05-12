@@ -89,7 +89,20 @@ sudo pacman -S git make patch subversion gcc cmake \
 Slicer built on CentOS 7 will be available for many Linux distributions and releases
 :::
 
-Install Qt and CMake as described in [Any Distribution](./linux.md#any-distribution) section.
+Install Qt as described in [Any Distribution](./linux.md#any-distribution) section. This might be needed to run the qt installer:
+
+```console
+yum install fontconfig xcb-util-wm xcb-util-image xcb-util-keysyms xcb-util-renderutil libxkbcommon-x11
+```
+
+Intall CMake:
+
+```console
+curl -LO https://github.com/Kitware/CMake/releases/download/v3.17.5/cmake-3.17.5-linux-x86_64.tar.gz
+tar -xvf cmake-3.17.5-linux-x86_64.tar.gz
+mv cmake-3.17.5-Linux-x86_64/ /usr/local/cmake
+echo 'export PATH="/usr/local/cmake/bin:$PATH"' >> ~/.bashrc
+```
 
 Since by default CentOS 7 comes with `gcc 4.8.5` only having [experimental support for C++14](https://gcc.gnu.org/onlinedocs/gcc-4.8.5/gcc/C-Dialect-Options.html#C-Dialect-Options), the following allows to install and activate the `devtoolset-11` [providing](https://access.redhat.com/documentation/en-us/red_hat_developer_toolset/11/html/11.0_release_notes/dts11.0_release#Changes_in_DTS) `gcc 11.2.1` [supporting C++20](https://en.cppreference.com/w/cpp/compiler_support/20):
 
@@ -101,7 +114,7 @@ scl enable devtoolset-11 bash         # activation is needed for every terminal 
 
 Install pre-requisites:
 ```console
-sudo yum install patch mesa-libGL-devel libuuid-devel
+sudo yum install patch mesa-libGL-devel libuuid-devel libXext libSM libXrender
 ```
 
 ### Any Distribution
