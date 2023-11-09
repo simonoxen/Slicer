@@ -166,9 +166,9 @@ function(fixup_bundle_with_plugins app)
       "${app_dir}/Contents/@Slicer_LIB_DIR@/*Python.so"
       "${app_dir}/Contents/@Slicer_LIB_DIR@/*PythonQt.so"
       # Since both core python and numpy module have no dependency beside of
-      # system library, there is no need to fix them.
-      # "${app_dir}/Contents/lib/Python/${PYTHON_SITE_PACKAGES_SUBDIR}/*.so"
-      #"${app_dir}/Contents/lib/Python/${PYTHON_STDLIB_SUBDIR}/lib-dynload/*.so"
+      # system library, there is no need to fix them. Other lib might contain (h5py)
+      "${app_dir}/Contents/lib/Python/${PYTHON_SITE_PACKAGES_SUBDIR}/*.so"
+      # "${app_dir}/Contents/lib/Python/${PYTHON_STDLIB_SUBDIR}/lib-dynload/*.so"
       )
   endif()
 
@@ -205,6 +205,7 @@ function(fixup_bundle_with_plugins app)
 
   # Additional libs may be found in:
   set(libs_path )
+  _fixup_paths_append(libs_path "@HDF5_LIB_DIR@")
   foreach(dir "@VTK_LIBRARY_DIRS@")
     _fixup_paths_append(libs_path ${dir})
   endforeach()

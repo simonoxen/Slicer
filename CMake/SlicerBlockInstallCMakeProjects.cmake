@@ -1,6 +1,16 @@
 include(${Slicer_CMAKE_DIR}/SlicerCheckModuleEnabled.cmake)  # For slicer_is_loadable_builtin_module_enabled
 
 # -------------------------------------------------------------------------
+# Install HDF5
+# -------------------------------------------------------------------------
+if(NOT "${HDF5_CACHE_DIR}" STREQUAL "" AND EXISTS "${HDF5_CACHE_DIR}/CMakeCache.txt")
+  set(CPACK_INSTALL_CMAKE_PROJECTS "${CPACK_INSTALL_CMAKE_PROJECTS};${HDF5_CACHE_DIR};HDF5;libraries;/")
+  set(CPACK_INSTALL_CMAKE_PROJECTS "${CPACK_INSTALL_CMAKE_PROJECTS};${HDF5_CACHE_DIR};HDF5;cpplibraries;/")
+  set(CPACK_INSTALL_CMAKE_PROJECTS "${CPACK_INSTALL_CMAKE_PROJECTS};${HDF5_CACHE_DIR};HDF5;hllibraries;/")
+  set(CPACK_INSTALL_CMAKE_PROJECTS "${CPACK_INSTALL_CMAKE_PROJECTS};${HDF5_CACHE_DIR};HDF5;hlcpplibraries;/")
+endif()
+
+# -------------------------------------------------------------------------
 # Install VTK
 # -------------------------------------------------------------------------
 if(NOT "${VTK_DIR}" STREQUAL "" AND EXISTS "${VTK_DIR}/CMakeCache.txt")
@@ -22,11 +32,9 @@ if(NOT "${ITK_DIR}" STREQUAL "" AND EXISTS "${ITK_DIR}/CMakeCache.txt")
   set(CPACK_INSTALL_CMAKE_PROJECTS "${CPACK_INSTALL_CMAKE_PROJECTS};${ITK_DIR};ITK;RuntimeLibraries;/")
   # GDCM
   set(CPACK_INSTALL_CMAKE_PROJECTS "${CPACK_INSTALL_CMAKE_PROJECTS};${ITK_DIR};ITK;Libraries;/")
-  # HDF5 - hdf5
+  # HDF5 for minc io
   set(CPACK_INSTALL_CMAKE_PROJECTS "${CPACK_INSTALL_CMAKE_PROJECTS};${ITK_DIR};ITK;libraries;/")
-  # HDF5 - hdf5_cpp
   set(CPACK_INSTALL_CMAKE_PROJECTS "${CPACK_INSTALL_CMAKE_PROJECTS};${ITK_DIR};ITK;cpplibraries;/")
-  # HDF5 - hdf5_hl
   set(CPACK_INSTALL_CMAKE_PROJECTS "${CPACK_INSTALL_CMAKE_PROJECTS};${ITK_DIR};ITK;hllibraries;/")
   # HDF5 until ITK4. final, then it can be removed
   set(CPACK_INSTALL_CMAKE_PROJECTS "${CPACK_INSTALL_CMAKE_PROJECTS};${ITK_DIR};ITK;Unspecified;/")
