@@ -9,14 +9,7 @@ set(CPACK_SOURCE_TZ   OFF CACHE BOOL "Enable to build TZ source packages" FORCE)
 # -------------------------------------------------------------------------
 # Select generator
 # -------------------------------------------------------------------------
-if(UNIX)
-  set(CPACK_GENERATOR "TGZ")
-  if(APPLE)
-    set(CPACK_GENERATOR "DragNDrop")
-  endif()
-elseif(WIN32)
-  set(CPACK_GENERATOR "NSIS")
-endif()
+set(CPACK_GENERATOR "ZIP")
 
 # -------------------------------------------------------------------------
 # Install standalone executable and plugins
